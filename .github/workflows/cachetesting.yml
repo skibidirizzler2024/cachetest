@@ -3,10 +3,10 @@ name: Folder cache
 on:
   push:
     branches:
-      - main  # Adjust as needed for different branches
+      - test2  # Adjust as needed for different branches
   pull_request:
     branches:
-      - main
+      - test2
 
 jobs:
   list-contents:
@@ -33,15 +33,15 @@ jobs:
       run: cat ./cachetestfolder/testfilecache.yaml
 
     - name: Cache test folder
-      id: cache-folder
+      id: cache-foldertest2
       uses: actions/cache@v3
       env:
         cache-name: cache-testfolder2
       with:
         #cache files are stored in `./testfolder`
         path: ./cachetestfolder
-        key: vidtest2024trythis2
-        restore-keys: vidtest2024trythis2
+        key: vidtest2024trythis2test2
+        restore-keys: vidtest2024trythis2test2
 
   cacheoutput:
     needs: list-contents  # Ensures this job runs after the list-contents job
@@ -52,12 +52,12 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Restore Cached Folder
-      id: cache-restore
+      id: cache-restoretest2
       uses: actions/cache@v3
       with:
         path: ./cachetestfolder
-        key: vidtest2024trythis2
-        restore-keys: vidtest2024trythis2
+        key: vidtest2024trythis2test2
+        restore-keys: vidtest2024trythis2test2
 
     - name: List restored files
       run: ls -la ./cachetestfolder
