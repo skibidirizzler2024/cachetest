@@ -21,16 +21,27 @@ jobs:
       env:
         GITHUB_WORKSPACE: ${{ github.workspace }}
 
+    - name: Create Directory and File
+      run: |
+        mkdir -p ./cachetestfolder
+        echo "pong" > ./cachetestfolder/testfilecache.yaml
+
+    - name: List files in the workspace
+      run: ls -la
+
+    - name: Display contents of the file
+      run: cat ./cachetestfolder/testfilecache.yaml
+
     - name: Cache test folder
-      id: cache-npm
+      id: cache-folder
       uses: actions/cache@v3
       env:
-        cache-name: cache-testfolder
+        cache-name: cache-testfolder2
       with:
         #cache files are stored in `./testfolder`
-        path: ./testfolder
-        key: vidtest2024trythis
-        restore-keys: vidtest2024trythis
+        path: ./cachetestfolder
+        key: vidtest2024trythis2
+        restore-keys: vidtest2024trythis2
 
 
 
