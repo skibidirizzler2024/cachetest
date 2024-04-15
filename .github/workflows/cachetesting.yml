@@ -43,7 +43,29 @@ jobs:
         key: vidtest2024trythis2
         restore-keys: vidtest2024trythis2
 
+  cacheoutput:
+    needs: list-contents  # Ensures this job runs after the list-contents job
+    runs-on: ubuntu-latest
 
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Restore Cached Folder
+      id: cache-restore
+      uses: actions/cache@v3
+      with:
+        path: ./cachetestfolder
+        key: vidtest2024trythis2
+        restore-keys: vidtest2024trythis2
+
+    - name: List restored files
+      run: ls -la ./cachetestfolder
+      if: steps.cache-restore.outputs.cache-hit == 'true'
+
+    - name: Check restored contents
+      run: cat ./cachetestfolder/testfilecache.yaml
+      if: steps.cache-restore.outputs.cache-hit == 'true'
 
 
 # name: Caching folder
