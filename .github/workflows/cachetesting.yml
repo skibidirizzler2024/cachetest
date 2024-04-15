@@ -21,19 +21,19 @@ jobs:
       env:
         GITHUB_WORKSPACE: ${{ github.workspace }}
 
-      - name: Cache test folder
-        id: cache-npm
-        uses: actions/cache@v3
-        env:
-          cache-name: cache-testfolder
-        with:
-          #cache files are stored in `./testfolder`
-          path: ./testfolder
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
+    - name: Cache test folder
+      id: cache-npm
+      uses: actions/cache@v3
+      env:
+        cache-name: cache-testfolder
+      with:
+        #cache files are stored in `./testfolder`
+        path: ./testfolder
+        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-build-${{ env.cache-name }}-
+          ${{ runner.os }}-build-
+          ${{ runner.os }}-
 
 
 
